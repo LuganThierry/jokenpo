@@ -53,8 +53,10 @@ def game(choice):
 
     print(f'Você escolheu {choice_dict[choice]}')
     print(f'Computador escolheu {choice_dict[computer]}')
+
+    res = game_res(choice, computer)
     
-    return game_res(choice, computer)
+    return print(res)
 
 
 def game_res(user_choice, computer_choice):
@@ -62,24 +64,18 @@ def game_res(user_choice, computer_choice):
     if user_choice == computer_choice:
         return "Empate!"
     
-    if [user_choice, computer_choice] == [1, 2]:
-        return "Você perdeu, sua pedra é enrolada pelo papel"
-    
-    if [user_choice, computer_choice] == [1, 3]:
-        return "Você ganhou, sua pedra quebra a tesoura"
-    
-    if [user_choice, computer_choice] == [2, 1]:
-        return "Você ganhou, seu papel enrola a pedra"
-    
-    if [user_choice, computer_choice] == [2, 3]:
-        return "Você perdeu, seu papel é cortado pela tesoura"
-    
-    if [user_choice, computer_choice] == [3, 1]:
-        return "Você perdeu, sua tesoura é quebrada pela pedra"
-    
-    if [user_choice, computer_choice] == [3, 2]:
-        return "Você ganhou, sua tesoura corta o papel"
+    outcomes = {
+            (1, 2): "Você perdeu, papel enrola pedra",
+            (1, 3): "Você ganhou, pedra quebra tesoura",
+            (2, 1): "Você ganhou, papel enrola pedra",
+            (2, 3): "Você perdeu, tesoura corta papel",
+            (3, 1): "Você perdeu, pedra quebra tesoura",
+            (3, 2): "Você ganhou, tesoura corta papel"
+        }
+
+    return outcomes[(user_choice, computer_choice)]
+
 
 choice = input("1 - Pedra\n2 - Papel\n3 - Tesoura\n")
 
-print(game(choice))
+game(choice)
